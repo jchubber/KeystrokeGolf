@@ -9,16 +9,16 @@
 document.onkeydown = function(e) {
     switch (e.keyCode) {
         case 37:
-            document.write('left');
+            document.body.innerHTML = "Left";
             break;
         case 38:
-            document.write('up');
+            document.body.innerHTML = "Up";
             break;
         case 39:
-            document.write('right');
+            document.body.innerHTML = "Right"
             break;
         case 40:
-            document.write('down');
+            document.body.innerHTML = "Down";
             break;
     }
 };
