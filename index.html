@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+#challenge {
+ font-size: 30px;
+}
+</style>
 </head>
 
 <body>
-<h1>Press an arrow key</h1>
+<h1 id="challenge">Press an arrow key</h1>
 <script>
 document.onkeydown = function(e) {
     switch (e.keyCode) {
         case 37:
-            document.body.innerHTML = "Left";
+            document.getElementById('challenge').innerHTML = "Left";
             break;
         case 38:
-            document.body.innerHTML = "Up";
+            document.getElementById('challenge').innerHTML = "Up";
             break;
         case 39:
-            document.body.innerHTML = "Right"
+            document.getElementById('challenge').innerHTML = "Right"
             break;
         case 40:
-            document.body.innerHTML = "Down";
+            document.getElementById('challenge').innerHTML = "Down";
             break;
     }
 };
