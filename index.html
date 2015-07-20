@@ -1,32 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-#challenge {
- font-size: 30px;
-}
-</style>
+<title>Keystroke Golf</title>
+
 </head>
 
 <body>
+
 <h1 id="challenge">Press an arrow key</h1>
+<div>
+<p id="score"></p>
 <script>
-document.onkeydown = function(e) {
-    switch (e.keyCode) {
+points=0
+var arrows = ['&#8678', '&#8679', '&#8680','&#8681'];
+var arrange = arrows[Math.floor(Math.random() * arrows.length)];
+var challenge=document.write(arrange);
+var element = document.getElementById("score");
+    element.innerHTML = "Points: "+points
+/*if (document.keydown===challenge) {
+    points=points+1
+    var element = document.getElementById("score");
+    element.innerHTML = "Points: "+ points;
+}; */
+</script>
+</div>
+<script id="controls">
+
+
+    document.onkeydown = function(e) {
+    switch(e.keyCode) {
         case 37:
-            document.getElementById('challenge').innerHTML = "&#8592";
+            document.getElementById('challenge').innerHTML = "&#8678"; //left
+            if (challenge===document.keydown){
+            points=points+1
+            var element = document.getElementById("score");
+            element.innerHTML = "Points: "+ points;
+            };
             break;
         case 38:
-            document.getElementById('challenge').innerHTML = "&#8593";
+            document.getElementById('challenge').innerHTML = "&#8679"; //up
+            if (challenge===document.keydown){
+             points=points+1
+             var element = document.getElementById("score");
+             element.innerHTML = "Points: "+ points;
+            };
             break;
         case 39:
-            document.getElementById('challenge').innerHTML = "&#8594";
+            document.getElementById('challenge').innerHTML = "&#8680"; //right
+            if (challenge===document.keydown){
+            points=points+1
+            var element = document.getElementById("score");
+            element.innerHTML = "Points: "+ points;
+            };
             break;
         case 40:
-            document.getElementById('challenge').innerHTML = "&#8595";
+            document.getElementById('challenge').innerHTML = "&#8681"; //down
+            if (challenge===document.keydown){
+            points=points+1
+            var element = document.getElementById("score");
+            element.innerHTML = "Points: "+ points;
+            };
             break;
-    }
+    };
 };
+
 </script>
+
+
 </body>
 </html>
