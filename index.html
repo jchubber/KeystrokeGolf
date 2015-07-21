@@ -11,21 +11,82 @@
 <div>
 <p id="score"></p>
 <script>
-points=0
-var arrows = ['&#8678', '&#8679', '&#8680','&#8681'];
-var arrange = arrows[Math.floor(Math.random() * arrows.length)];
-var challenge=document.write(arrange);
-var element = document.getElementById("score");
-    element.innerHTML = "Points: "+points
-/*if (document.keydown===challenge) {
-    points=points+1
+    points=0
+    var arrows = ['&#8678', '&#8679', '&#8680','&#8681'];
+    var arrange = arrows[Math.floor(Math.random() * arrows.length)];
+    var challenge=document.write(arrange);
     var element = document.getElementById("score");
-    element.innerHTML = "Points: "+ points;
-}; */
+        element.innerHTML = "Points: "+points
+    /*if (document.keydown===challenge) {
+        points=points+1
+        var element = document.getElementById("score");
+        element.innerHTML = "Points: "+ points;
+    }; */
+    document.onkeydown = checkKey;
+
+    function checkKey(e) {
+
+        e =  window.event;
+
+        if (e.keyCode == '38') {
+            document.getElementById('challenge').innerHTML = "&#8679"; // up arrow
+            if (document.keydown == challenge){
+                points=points+1
+                var element = document.getElementById("score");
+                element.innerHTML = "Points: "+ points;
+            } else {
+                points=points-1
+                var element = document.getElementById("score");
+                element.innerHTML = "Points: "+ points;
+    }
+    }
+
+        else if (e.keyCode == '40') {
+            document.getElementById('challenge').innerHTML = "&#8681"; // down arrow
+            if (document.keydown == challenge){
+                points=points+1
+                var element = document.getElementById("score");
+                element.innerHTML = "Points: "+ points;
+            } else {
+                points=points-1
+                var element = document.getElementById("score");
+                element.innerHTML = "Points: "+ points;
+    }
+     }
+        else if (e.keyCode == '37') {
+            document.getElementById('challenge').innerHTML = "&#8678"; // left arrow
+            if (document.keydown == challenge){
+                points=points+1
+                var element = document.getElementById("score");
+                element.innerHTML = "Points: "+ points;
+            } else {
+                points=points-1
+                var element = document.getElementById("score");
+                element.innerHTML = "Points: "+ points;
+        }
+        }
+        else if (e.keyCode == '39') {
+           document.getElementById('challenge').innerHTML = "&#8680"; // right arrow
+           if (document.keydown == challenge){
+               points=points+1
+               var element = document.getElementById("score");
+               element.innerHTML = "Points: "+ points;
+           } else {
+                points=points-1
+                var element = document.getElementById("score");
+                element.innerHTML = "Points: "+ points;
+        }
+
+    }
+    };
+
 </script>
 </div>
-<script id="controls">
+<script id="controls"></script>
 
+</body>
+</html>
+<!--
 
     document.onkeydown = function(e) {
     switch(e.keyCode) {
@@ -63,9 +124,3 @@ var element = document.getElementById("score");
             break;
     };
 };
-
-</script>
-
-
-</body>
-</html>
