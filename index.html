@@ -67,19 +67,23 @@ function e_ratio(){// named the efficiency ratio e_ratio for short
 function lvl(){//named function lvl
     level=1 //First level is one
     document.getElementById("levels").innerHTML="Level:" + level; //level is displayed
-    if (points>=10){//when you get 10 points...
+    if (points> 9 && points< 25){//when you get 10 points...
+        challenge_options = ['32','37', '38', '39','40'];
         level=2 // the level will be 2
         document.getElementById("levels").innerHTML="Level:" + level; //level is displayed
     }
-    else if (points>=25){//when you get 25 points...
+    else if (points>24 && points<50){//when you get 25 points...
+        challenge_options = ['32','37', '38', '39','40','65','83','68','70'];
         level=3 // the level will be 3
         document.getElementById("levels").innerHTML="Level:" + level; //level is displayed
     }
-    else if (points>=50){//when you get 50 points...
+    else if (points>49 && points<75){//when you get 50 points...
+        challenge_options = ['32','37', '38', '39','40','48','49','50','51','52','53','54','55','56','57','65','83','68','70'];
         level=4 // the level will be 4
         document.getElementById("levels").innerHTML="Level:" + level; //level is displayed
     }
-    else if (points>=75){//when you get 75 points...
+    else if (points>74){//when you get 75 points...
+        challenge_options = ['32','37', '38', '39','40','48','49','50','51','52','53','54','55','56','57','65','66','67','69','71','72','73','74','75','76','77','78','79','80','81','82','84','85','86','87','88','89','90','83','68','70'];
         level=5 // the level will be 5
         document.getElementById("levels").innerHTML="Level:" + level; //level is displayed
     }
