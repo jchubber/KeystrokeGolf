@@ -58,7 +58,7 @@ setInterval( function(){
 //Create an efficiency ratio
 function e_ratio(){
     ratio=points/sec
-    Math.round(ratio);
+    Math.floor(ratio);
 	document.getElementById("efficiency ratio").innerHTML="Efficiency Ratio:" + ratio;
 }
 
