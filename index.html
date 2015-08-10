@@ -3,20 +3,48 @@
 <head>
 <title>Keystroke Golf</title>
 <link rel="icon" type="image/png" href="http://eqsport.info/wp-content/uploads/2015/05/golf-ball-vector-png-tqwhsntv.png" />
+<style>
+
+    li {
+    display: inline-block;
+    padding: 10px 10px 10px 10px;
+  }
+    ul{
+    text-align: center;
+    font-size: 24px;
+    }
+
+    #challenge{
+        text-align: center;
+        font-size: 3em;
+        position: relative;
+        -webkit-animation: anime 4s infinite;
+        -webkit-animation-play-state: running;
+    }
+
+    @-webkit-keyframes anime {
+        0%{color:#FFFF00;}
+        25% {color: orange:}
+        50%{ color: red;}
+        75% {color: purple}
+        100% {color: blue;}
+    }
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 
 <body>
 
-<h1 id="challenge">Press an arrow key</h1>
+
 <div>
-<p id="score"></p>
-<div id = timer>
-    <span>Timer: </span><span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
-</div>
-<div id = "efficiency ratio"></div>
-<div id = "levels"></div>
-
-
+<ul>
+  <li style="color: #FF9900"><div id = "levels"></div></li>
+  <li style="color: blue"><div id="score"></div></li>
+  <li style="color: red"><div><span id="minutes"></span><span id="seconds"></span></div></li>
+  <li style="color: purple"><div id = "efficiency ratio"></div></li>
+</ul>
+<h1 id="challenge">Welcome to Key Match<br><span style="font-size: 25px">Press an arrow key to Begin</span></h1>
 <script>
 // Normally we would turn a keyCode into a string using String.fromCharCode(challenge), however fromCharCode doesn't work with the arrow keys. As a result, I found a workaround at http://stackoverflow.com/a/23377822 that uses a "mapping". I then changed the mapping for the arrow keys (37-40) to their unicode values such as &#x2193.
 var keyboardMap = ["","","","CANCEL","","","HELP","","BACK_SPACE","TAB","","","CLEAR","ENTER","RETURN","","SHIFT","CONTROL","ALT","PAUSE","CAPS_LOCK","KANA","EISU","JUNJA","FINAL","HANJA","","ESCAPE","CONVERT","NONCONVERT","ACCEPT","MODECHANGE","SPACE","PAGE_UP","PAGE_DOWN","END","HOME","&#8678","&#8679","&#8680","&#8681","SELECT","PRINT","EXECUTE","PRINTSCREEN","INSERT","DELETE","","0","1","2","3","4","5","6","7","8","9","COLON","SEMICOLON","LESS_THAN","EQUALS","GREATER_THAN","QUESTION_MARK","AT","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","WIN","","CONTEXT_MENU","","SLEEP","NUMPAD0","NUMPAD1","NUMPAD2","NUMPAD3","NUMPAD4","NUMPAD5","NUMPAD6","NUMPAD7","NUMPAD8","NUMPAD9","MULTIPLY","ADD","SEPARATOR","SUBTRACT","DECIMAL","DIVIDE","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","F13","F14","F15","F16","F17","F18","F19","F20","F21","F22","F23","F24","","","","","","","","","NUM_LOCK","SCROLL_LOCK","WIN_OEM_FJ_JISHO","WIN_OEM_FJ_MASSHOU","WIN_OEM_FJ_TOUROKU","WIN_OEM_FJ_LOYA","WIN_OEM_FJ_ROYA","","","","","","","","","","CIRCUMFLEX","EXCLAMATION","DOUBLE_QUOTE","HASH","DOLLAR","PERCENT","AMPERSAND","UNDERSCORE","OPEN_PAREN","CLOSE_PAREN","ASTERISK","PLUS","PIPE","HYPHEN_MINUS","OPEN_CURLY_BRACKET","CLOSE_CURLY_BRACKET","TILDE","","","","","VOLUME_MUTE","VOLUME_DOWN","VOLUME_UP","","","SEMICOLON","EQUALS","COMMA","MINUS","PERIOD","SLASH","BACK_QUOTE","","","","","","","","","","","","","","","","","","","","","","","","","","","OPEN_BRACKET","BACK_SLASH","CLOSE_BRACKET","QUOTE","","META","ALTGR","","WIN_ICO_HELP","WIN_ICO_00","","WIN_ICO_CLEAR","","","WIN_OEM_RESET","WIN_OEM_JUMP","WIN_OEM_PA1","WIN_OEM_PA2","WIN_OEM_PA3","WIN_OEM_WSCTRL","WIN_OEM_CUSEL","WIN_OEM_ATTN","WIN_OEM_FINISH","WIN_OEM_COPY","WIN_OEM_AUTO","WIN_OEM_ENLW","WIN_OEM_BACKTAB","ATTN","CRSEL","EXSEL","EREOF","PLAY","ZOOM","","PA1","WIN_OEM_CLEAR",""];
@@ -51,13 +79,14 @@ function zero() { //Named the function zero
 //Create a timer
 	var sec = 0;
 function pad ( val ) { return val > 9 ? val : "0" + val; }
-setInterval( function(){
-    document.getElementById("seconds").innerHTML=pad(++sec%60);
-    document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
+timer=function(){
+    document.getElementById("seconds").innerHTML= ':' + pad(++sec%60);
+    document.getElementById("minutes").innerHTML="Timer: " + pad(parseInt(sec/60,10));
     if (points==0){
     sec = -1;
     }
-}, 1000);
+}
+setInterval( timer, 1000);
 
 //Create an efficiency ratio
 function e_ratio(){// named the efficiency ratio e_ratio for short
@@ -112,13 +141,20 @@ function checkKey(e) { // Then the program should check to see if the key that w
         new_challenge();// ...and the challenge is refreshed.
         e_ratio(); //... displays efficiency ratio
         lvl(); //...displays levels
-        challenge_options = ['37', '38', '39','40'];// challenge returns to the original
+        challenge_options = ['37','38','39','40'];// challenge returns to the original
+        document.body.style.background = "url('Pics/triangular.png')";
+
+
+
     }
 }
 
+
 </script>
+
 </div>
 <script id="controls"></script>
 
 </body>
 </html>
+
