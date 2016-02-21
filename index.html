@@ -1,161 +1,223 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Keystroke Golf</title>
-<link rel="icon" type="image/png" href="http://eqsport.info/wp-content/uploads/2015/05/golf-ball-vector-png-tqwhsntv.png" />
-<style>
+    <title>Keystroke</title>
+    <link rel="icon" type="image/png" href="http://icons.iconarchive.com/icons/chromatix/keyboard-keys/128/arrow-up-icon.png" />
+    <style>
 
-    li {
-    display: inline-block;
-    padding: 10px 10px 10px 10px;
-  }
-    ul{
-    text-align: center;
-    font-size: 24px;
-    }
+        li {
+            display: inline-block;
+            padding: 10px 10px 10px 10px;
+        }
+        ul{
+            text-align: center;
+            font-size: 24px;
+        }
 
-    #challenge{
-        text-align: center;
-        font-size: 3em;
-        position: relative;
-        -webkit-animation: anime 4s infinite;
-        -webkit-animation-play-state: running;
-    }
+        #challenge{
+            text-align: center;
+            font-size: 3em;
+            position: relative;
+            -webkit-animation: anime 4s infinite;
+            -webkit-animation-play-state: running;
+        }
 
-    @-webkit-keyframes anime {
-        0%{color:#FFFF00;}
-        25% {color: orange:}
-        50%{ color: red;}
-        75% {color: purple}
-        100% {color: blue;}
-    }
+        @-webkit-keyframes anime {
+            0%{color:#FFFF00;}
+            25% {color: orange:}
+            50%{ color: red;}
+            75% {color: purple}
+            100% {color: blue;}
+        }
 
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        footer{
+            font-size: 13px;
+        }
+
+        @media only screen
+        and (min-device-width : 320px)
+        and (max-device-width : 480px) {
+            #banner{
+                background: gray;
+                height: 200px;
+                background-size: cover;
+                position: relative;
+                margin: 130px 0 0 0;
+                border-radius: 0px;
+                font-size: 3em;
+                vertical-align: bottom;
+            }
+            body{
+                display: block;
+                width: 100%;
+            }
+            li { display: block;
+                padding: 5px;
+            }
+        }
+        #banner {
+            background: gray;
+            height: 200px;
+            background-size: cover;
+            position: relative;
+            margin: 130px 0 0 0;
+            border-radius: 0px;
+            font-size: 3em;
+            vertical-align: bottom;
+        }
+
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 
 <body>
 
+<header>
+    <h1 style="text-align: center" >Keystroke</h1>
+</header>
 
-<div>
-<ul>
-  <li style="color: #FF9900"><div id = "levels"></div></li>
-  <li style="color: blue"><div id="score"></div></li>
-  <li style="color: red"><div><span id="minutes"></span><span id="seconds"></span></div></li>
-  <li style="color: purple"><div id = "efficiency ratio"></div></li>
-</ul>
-<h1 id="challenge">Welcome to Key Match<br><span style="font-size: 25px">Press an arrow key to Begin</span></h1>
+<div id="screen">
+    <ul>
+        <li style="color: #FF9900"><div id = "levels"></div></li>
+        <li style="color: blue"><div id="score"></div></li>
+        <li style="color: red"><div><span id="minutes"></span><span id="seconds"></span></div></li>
+        <li style="color: purple"><div id = "efficiency ratio"></div></li>
+    </ul>
+
+    <h1 id="challenge"><span style="font-size: 25px">Press an arrow key to Begin</span></h1>
+</div>
+<p id="result"></p>
 <script>
-// Normally we would turn a keyCode into a string using String.fromCharCode(challenge), however fromCharCode doesn't work with the arrow keys. As a result, I found a workaround at http://stackoverflow.com/a/23377822 that uses a "mapping". I then changed the mapping for the arrow keys (37-40) to their unicode values such as &#x2193.
-var keyboardMap = ["","","","CANCEL","","","HELP","","BACK_SPACE","TAB","","","CLEAR","ENTER","RETURN","","SHIFT","CONTROL","ALT","PAUSE","CAPS_LOCK","KANA","EISU","JUNJA","FINAL","HANJA","","ESCAPE","CONVERT","NONCONVERT","ACCEPT","MODECHANGE","SPACE","PAGE_UP","PAGE_DOWN","END","HOME","&#8678","&#8679","&#8680","&#8681","SELECT","PRINT","EXECUTE","PRINTSCREEN","INSERT","DELETE","","0","1","2","3","4","5","6","7","8","9","COLON","SEMICOLON","LESS_THAN","EQUALS","GREATER_THAN","QUESTION_MARK","AT","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","WIN","","CONTEXT_MENU","","SLEEP","NUMPAD0","NUMPAD1","NUMPAD2","NUMPAD3","NUMPAD4","NUMPAD5","NUMPAD6","NUMPAD7","NUMPAD8","NUMPAD9","MULTIPLY","ADD","SEPARATOR","SUBTRACT","DECIMAL","DIVIDE","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","F13","F14","F15","F16","F17","F18","F19","F20","F21","F22","F23","F24","","","","","","","","","NUM_LOCK","SCROLL_LOCK","WIN_OEM_FJ_JISHO","WIN_OEM_FJ_MASSHOU","WIN_OEM_FJ_TOUROKU","WIN_OEM_FJ_LOYA","WIN_OEM_FJ_ROYA","","","","","","","","","","CIRCUMFLEX","EXCLAMATION","DOUBLE_QUOTE","HASH","DOLLAR","PERCENT","AMPERSAND","UNDERSCORE","OPEN_PAREN","CLOSE_PAREN","ASTERISK","PLUS","PIPE","HYPHEN_MINUS","OPEN_CURLY_BRACKET","CLOSE_CURLY_BRACKET","TILDE","","","","","VOLUME_MUTE","VOLUME_DOWN","VOLUME_UP","","","SEMICOLON","EQUALS","COMMA","MINUS","PERIOD","SLASH","BACK_QUOTE","","","","","","","","","","","","","","","","","","","","","","","","","","","OPEN_BRACKET","BACK_SLASH","CLOSE_BRACKET","QUOTE","","META","ALTGR","","WIN_ICO_HELP","WIN_ICO_00","","WIN_ICO_CLEAR","","","WIN_OEM_RESET","WIN_OEM_JUMP","WIN_OEM_PA1","WIN_OEM_PA2","WIN_OEM_PA3","WIN_OEM_WSCTRL","WIN_OEM_CUSEL","WIN_OEM_ATTN","WIN_OEM_FINISH","WIN_OEM_COPY","WIN_OEM_AUTO","WIN_OEM_ENLW","WIN_OEM_BACKTAB","ATTN","CRSEL","EXSEL","EREOF","PLAY","ZOOM","","PA1","WIN_OEM_CLEAR",""];
+    // Normally we would turn a keyCode into a string using String.fromCharCode(challenge), however fromCharCode doesn't work with the arrow keys. As a result, I found a workaround at http://stackoverflow.com/a/23377822 that uses a "mapping". I then changed the mapping for the arrow keys (37-40) to their unicode values such as &#x2193.
+    var keyboardMap = ["","","","CANCEL","","","HELP","","BACK_SPACE","TAB","","","CLEAR","ENTER","RETURN","","SHIFT","CONTROL","ALT","PAUSE","CAPS_LOCK","KANA","EISU","JUNJA","FINAL","HANJA","","ESCAPE","CONVERT","NONCONVERT","ACCEPT","MODECHANGE","SPACE","PAGE_UP","PAGE_DOWN","END","HOME","&#8678","&#8679","&#8680","&#8681","SELECT","PRINT","EXECUTE","PRINTSCREEN","INSERT","DELETE","","0","1","2","3","4","5","6","7","8","9","COLON","SEMICOLON","LESS_THAN","EQUALS","GREATER_THAN","QUESTION_MARK","AT","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","WIN","","CONTEXT_MENU","","SLEEP","NUMPAD0","NUMPAD1","NUMPAD2","NUMPAD3","NUMPAD4","NUMPAD5","NUMPAD6","NUMPAD7","NUMPAD8","NUMPAD9","MULTIPLY","ADD","SEPARATOR","SUBTRACT","DECIMAL","DIVIDE","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","F13","F14","F15","F16","F17","F18","F19","F20","F21","F22","F23","F24","","","","","","","","","NUM_LOCK","SCROLL_LOCK","WIN_OEM_FJ_JISHO","WIN_OEM_FJ_MASSHOU","WIN_OEM_FJ_TOUROKU","WIN_OEM_FJ_LOYA","WIN_OEM_FJ_ROYA","","","","","","","","","","CIRCUMFLEX","EXCLAMATION","DOUBLE_QUOTE","HASH","DOLLAR","PERCENT","AMPERSAND","UNDERSCORE","OPEN_PAREN","CLOSE_PAREN","ASTERISK","PLUS","PIPE","HYPHEN_MINUS","OPEN_CURLY_BRACKET","CLOSE_CURLY_BRACKET","TILDE","","","","","VOLUME_MUTE","VOLUME_DOWN","VOLUME_UP","","","SEMICOLON","EQUALS","COMMA","MINUS","PERIOD","SLASH","BACK_QUOTE","","","","","","","","","","","","","","","","","","","","","","","","","","","OPEN_BRACKET","BACK_SLASH","CLOSE_BRACKET","QUOTE","","META","ALTGR","","WIN_ICO_HELP","WIN_ICO_00","","WIN_ICO_CLEAR","","","WIN_OEM_RESET","WIN_OEM_JUMP","WIN_OEM_PA1","WIN_OEM_PA2","WIN_OEM_PA3","WIN_OEM_WSCTRL","WIN_OEM_CUSEL","WIN_OEM_ATTN","WIN_OEM_FINISH","WIN_OEM_COPY","WIN_OEM_AUTO","WIN_OEM_ENLW","WIN_OEM_BACKTAB","ATTN","CRSEL","EXSEL","EREOF","PLAY","ZOOM","","PA1","WIN_OEM_CLEAR",""];
 
-// There are four arrow directions that could be used for the challenge. Up, down, left, and right. All in keycode values.
-challenge_options = ['37', '38', '39','40'];
+    // There are four arrow directions that could be used for the challenge. Up, down, left, and right. All in keycode values.
+    challenge_options = ['37', '38', '39','40'];
 
-// Create a function that updates the challenge.
-function new_challenge() {// Every time the challenge field needs to be updated...
-    challenge = challenge_options[Math.floor(Math.random() * challenge_options.length)]; // ...it gets updated with a random selection from those four arrow directions...
-    document.getElementById('challenge').innerHTML = keyboardMap[challenge];//String.fromCharCode(challenge); // ...and the #challenge div gets updated with the string form of the challenge keycode.
-}
-
-// The user starts off with zero points.
-points = 0;
-
-//Home Picture
-document.body.style.background = "url('Pics/triangular.png')";
-
-// Create a function that awards points to users.
-function streak_extend(amount){// Every time the user is awarded points (positive OR negative)...
-    points = points + amount; // ...the score variable gets updated...
-    document.getElementById("score").innerHTML = "Streak: "+ points;// and the #score div updates to reflect the updated score.
-}
-
-//Create a function that brings point streak to zero
-function zero() { //Named the function zero
-    points = 0 //Brings points to a zero
-    document.getElementById("score").innerHTML = "Streak: "+ points;// Displays points
-}
-
-//Create a timer
-	var sec = 0;
-function pad ( val ) { return val > 9 ? val : "0" + val; }
-timer=function(){
-    document.getElementById("seconds").innerHTML= ':' + pad(++sec%60);
-    document.getElementById("minutes").innerHTML="Timer: " + pad(parseInt(sec/60,10));
-    if (points==0){
-    sec = -1;
+    // Create a function that updates the challenge.
+    function new_challenge() {// Every time the challenge field needs to be updated...
+        challenge = challenge_options[Math.floor(Math.random() * challenge_options.length)]; // ...it gets updated with a random selection from those four arrow directions...
+        document.getElementById('challenge').innerHTML = keyboardMap[challenge];//String.fromCharCode(challenge); // ...and the #challenge div gets updated with the string form of the challenge keycode.
     }
-}
-setInterval( timer, 1000);
 
-//Create an efficiency ratio
-function e_ratio(){// named the efficiency ratio e_ratio for short
-    ratio=points/sec //made the ratio of points divided by seconds
-    Math.floor(ratio);// rounded the ratio
-	document.getElementById("efficiency ratio").innerHTML="Efficiency Ratio:" + ratio;// displayed ratio
-}
+    // The user starts off with zero points.
+    points = 0;
 
-//Create levels
-function lvl(){//named function lvl
-    level=1 //First level is one
-    document.getElementById("levels").innerHTML="Level:" + level; //level is displayed
-    if (points> 9 && points< 25){//when you get 10 points...
-        document.body.style.background = "url('Pics/symphony.png')"; // Pic changes
-        challenge_options = ['32','37', '38', '39','40'];// add spacebar
-        level=2 // the level will be 2
+    //Home Picture
+    document.body.style.background = "url('Pics/triangular.png')";
+
+    // Create a function that awards points to users.
+    function streak_extend(amount){// Every time the user is awarded points (positive OR negative)...
+        points = points + amount; // ...the score variable gets updated...
+        document.getElementById("score").innerHTML = "Streak: "+ points;// and the #score div updates to reflect the updated score.
+    }
+
+    //Create a function that brings point streak to zero
+    function zero() { //Named the function zero
+        points = 0 //Brings points to a zero
+        document.getElementById("score").innerHTML = "Streak: "+ points;// Displays points
+    }
+
+    //Create a local Storage
+    function save() {
+        if (typeof(Storage) !== "undefined") {
+            // Store
+            localStorage.setItem("Points", points);
+            localStorage.setItem("Level", level);
+            localStorage.setItem("Efficiency Ratio", ratio);
+            // Retrieve
+            document.getElementById("result").innerHTML = localStorage.getItem("Points");
+        } else {
+            document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        }
+    }
+
+    //Create a timer
+    var sec = 0;
+    function pad ( val ) { return val > 9 ? val : "0" + val; }
+    timer=function(){
+        document.getElementById("seconds").innerHTML= ':' + pad(++sec%60);
+        document.getElementById("minutes").innerHTML="Timer: " + pad(parseInt(sec/60,10));
+        if (points==0){
+            sec = -1;
+        }
+    }
+    setInterval( timer, 1000);
+
+    //Create an efficiency ratio
+    function e_ratio(){// named the efficiency ratio e_ratio for short
+        ratio=points/sec //made the ratio of points divided by seconds
+        Math.floor(ratio);// rounded the ratio
+        return ratio
+        document.getElementById("efficiency ratio").innerHTML="Efficiency Ratio:" + ratio;// displayed ratio
+    }
+
+    //Create levels
+    function lvl(){//named function lvl
+        level=1 //First level is one
         document.getElementById("levels").innerHTML="Level:" + level; //level is displayed
+        if (points> 9 && points< 25){//when you get 10 points...
+            document.body.style.background = "url('Pics/symphony.png')"; // Pic changes
+            challenge_options = ['32','37', '38', '39','40'];// add spacebar
+            level=2 // the level will be 2
+            document.getElementById("levels").innerHTML="Level:" + level; //level is displayed
+        }
+        else if (points>24 && points<50){//when you get 25 points...
+            document.body.style.background = "url('Pics/mooning.png')";// Pic changes
+            challenge_options = ['32','37', '38', '39','40','65','83','68','70'];//add keys a,s,d and f
+            level=3 // the level will be 3
+            document.getElementById("levels").innerHTML="Level:" + level; //level is displayed
+        }
+        else if (points>49 && points<75){//when you get 50 points...
+            document.body.style.background = "url('Pics/contemporary_china.png')";// Pic changes
+            challenge_options = ['32','37', '38', '39','40','48','49','50','51','52','53','54','55','56','57','65','83','68','70'];//add numbers 0-9
+            level=4 // the level will be 4
+            document.getElementById("levels").innerHTML="Level:" + level; //level is displayed
+        }
+        else if (points>74){//when you get 75 points...
+            challenge_options = ['32','37', '38', '39','40','48','49','50','51','52','53','54','55','56','57','65','66','67','69','71','72','73','74','75','76','77','78','79','80','81','82','84','85','86','87','88','89','90','83','68','70']; //added all letters of alphabet
+            level=5 // the level will be 5
+            document.body.style.background = "url('Pics/pink_rice.png')";// Pic changes
+            document.getElementById("levels").innerHTML="Level:" + level; //level is displayed
+        }
     }
-    else if (points>24 && points<50){//when you get 25 points...
-        document.body.style.background = "url('Pics/mooning.png')";// Pic changes
-        challenge_options = ['32','37', '38', '39','40','65','83','68','70'];//add keys a,s,d and f
-        level=3 // the level will be 3
-        document.getElementById("levels").innerHTML="Level:" + level; //level is displayed
+
+    // To start the game, the challenge field (which is empty before the game loads) gets immediately updated once the game loads.
+    new_challenge
+
+    document.onkeydown = checkKey;// When the user presses a key,
+    function checkKey(e) { // Then the program should check to see if the key that was pressed is the same as the current challenge arrow direction
+        e = window.event;
+        if (e.keyCode == challenge) { // If it is...
+            streak_extend(1);// ...then they get awarded +1 points...
+            new_challenge();// ...and the challenge is refreshed.
+            e_ratio(); //... displays efficiency ratio
+            lvl(); //...displays levels
+            save();
+        } else { // But if it is not the same...
+            new_challenge();// ...and the challenge is refreshed.
+            e_ratio(); //... displays efficiency ratio
+            lvl(); //...displays levels
+            challenge_options = ['37','38','39','40'];// challenge returns to the original
+            document.body.style.background = "url('Pics/triangular.png')";
+            confirm("Try again!" + "\n" + "\n" + "High Score: " +points+ "\n" + "Highest Level: " + level + "\n" + "Efficiency Ratio: " + ratio);
+            zero();// ...then they get awarded -1 points...
+            $(document).ready(function(){
+                $('p').hide();
+            });
+        }
     }
-    else if (points>49 && points<75){//when you get 50 points...
-        document.body.style.background = "url('Pics/contemporary_china.png')";// Pic changes
-        challenge_options = ['32','37', '38', '39','40','48','49','50','51','52','53','54','55','56','57','65','83','68','70'];//add numbers 0-9
-        level=4 // the level will be 4
-        document.getElementById("levels").innerHTML="Level:" + level; //level is displayed
-    }
-    else if (points>74){//when you get 75 points...
-        challenge_options = ['32','37', '38', '39','40','48','49','50','51','52','53','54','55','56','57','65','66','67','69','71','72','73','74','75','76','77','78','79','80','81','82','84','85','86','87','88','89','90','83','68','70']; //added all letters of alphabet
-        level=5 // the level will be 5
-        document.body.style.background = "url('Pics/pink_rice.png')";// Pic changes
-        document.getElementById("levels").innerHTML="Level:" + level; //level is displayed
-    }
-}
 
-// To start the game, the challenge field (which is empty before the game loads) gets immediately updated once the game loads.
-new_challenge
-
-document.onkeydown = checkKey;// When the user presses a key,
-function checkKey(e) { // Then the program should check to see if the key that was pressed is the same as the current challenge arrow direction
-    e = window.event;
-    if (e.keyCode == challenge) { // If it is...
-        streak_extend(1);// ...then they get awarded +1 points...
-        new_challenge();// ...and the challenge is refreshed.
-        e_ratio(); //... displays efficiency ratio
-        lvl(); //...displays levels
-    } else { // But if it is not the same...
-        zero();// ...then they get awarded -1 points...
-        new_challenge();// ...and the challenge is refreshed.
-        e_ratio(); //... displays efficiency ratio
-        lvl(); //...displays levels
-        challenge_options = ['37','38','39','40'];// challenge returns to the original
-        document.body.style.background = "url('Pics/triangular.png')";
-
-
-
-
-    }
-}
 
 
 </script>
 
-</div>
 <script id="controls"></script>
-
+<footer>
+    <h2 style="text-align:center">Made by:<a href="https://github.com/earlsimpson3"> earlsimpson3</a></h2>
+</footer>
+<div id='banner' style="text-align:center"><br>
+    Optimized for desktops!!!
+</div>
 </body>
 </html>
-
