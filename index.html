@@ -123,6 +123,8 @@
         if (typeof(Storage) !== "undefined") {
             // Store
             localStorage.setItem("Points", points);
+            localStorage.setItem("Level", level);
+            localStorage.setItem("Efficiency Ratio", ratio);
             // Retrieve
             document.getElementById("result").innerHTML = localStorage.getItem("Points");
         } else {
@@ -198,7 +200,7 @@
             lvl(); //...displays levels
             challenge_options = ['37','38','39','40'];// challenge returns to the original
             document.body.style.background = "url('Pics/triangular.png')";
-            confirm(points);
+            confirm("Try again!" + "\n" + "\n" + "High Score: " +points+ "\n" + "Highest Level: " + level + "\n" + "Efficiency Ratio: " + ratio);
             zero();// ...then they get awarded -1 points...
             $(document).ready(function(){
                 $('p').hide();
